@@ -94,7 +94,7 @@ function! cmtools#CMToolsYCM(...)
 		return 1
 	endif
 	if filereadable(l:target_file)
-		delete(l:target_file)
+		call delete(l:target_file)
 	endif
 
 	execute "!ln -s " . l:target_file . " " . l:source_file
