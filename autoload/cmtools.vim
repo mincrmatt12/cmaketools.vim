@@ -37,11 +37,11 @@ function! s:CMToolsGetBuildDir(val)
 endfunction
 
 " CMToolsGetMakeDir(str val) gets the make dir using getbuilddir
-let s:cmtools_last_makedir = s:CMToolsGetBuildDir(g:cmtools_default_dir)
+let s:cmtools_last_makedir = getcwd() . s:CMToolsGetBuildDir(g:cmtools_default_dir)
 
 function! s:CMToolsGetMakeDir(val)
 	if a:val == ''
-		return getcwd() . s:cmtools_last_makedir
+		return s:cmtools_last_makedir
 	endif
 	let s:cmtools_last_makedir = getcwd() . s:CMToolsGetBuildDir(a:val)
 	return s:cmtools_last_makedir
