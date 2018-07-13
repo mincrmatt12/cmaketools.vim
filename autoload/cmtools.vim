@@ -70,6 +70,9 @@ function! cmtools#CMToolsGenerate(...)
 	call s:CMToolsMakeDir(l:make_dir)
 	" construct the cmake command out of cd makedir; cmake args
 	execute "!cd " . l:make_dir . "; " . g:cmtools_cmake . " .. " . l:cmake_args
+	if g:cmtools_ycm_autolink
+		call cmtools#CMToolsYCM()
+	endif
 endfunction
 " CMBuild.impl
 function! cmtools#CMToolsBuild(...)
