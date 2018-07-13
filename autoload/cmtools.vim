@@ -97,6 +97,6 @@ function! cmtools#CMToolsYCM(...)
 		call delete(l:target_file)
 	endif
 
-	execute "!ln -s " . l:target_file . " " . l:source_file
+	execute "!ln -s " . l:source_file . " " . l:target_file
 endfunction
 
