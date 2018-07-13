@@ -16,7 +16,13 @@ if !exists('g:cmtools_default_dir')
 	let g:cmtools_default_dir = 'cmake-build-debug'
 endif
 
+if !exists('g:cmtools_ycm_gen')
+	let g:cmtools_ycm_gen = 0
+endif
 
+if !exists('g:cmtools_ycm_autolink')
+	let g:cmtools_ycm_autolink = 0
+endif
 " Helper functions
 
 " CMToolsGetBuildDir(str val): if val == "" return the default else return
@@ -54,6 +60,9 @@ endfunction
 function! cmtools#CMToolsGenerate(...)
 	let a:build_dir = get(a:, 1, '')
 	let l:cmake_args = a:000[1:]
+	if g:cmtools_ycm_gen
+		call add(l:cmake_args, "-DCMAKE_EXPORT_COMPILE_COMMANDS")
+	endif
 
 	let l:make_dir = s:CMToolsGetMakeDir(a:build_dir)
 	let l:cmake_args = join(l:cmake_args)
@@ -74,5 +83,16 @@ function! cmtools#CMToolsBuild(...)
 
 	execute "!cd " . l:build_dir . "; " . g:cmtools_mkprog . " " . l:make_args
 endfunction
+" CMYCM.impl
+function! cmtools#CMToolsYCM(...)
+	let l:build_dir = s:CMToolsMakeDir(get(a:, 1, ''))
+	let l:source_file = l:build_dir . "/compile_commands.json"
 
+	if !filereadable(l:source_file)
+		echom "There isn't a compile_commands.json at " . l:source_file . "!"
+		return 1
+	endif
+
+	execute "!ln -s " . getcwd() . "/compile_commands.json " . l:source_file
+endfunction
 

@@ -6,4 +6,4 @@
 
 command! -nargs=* CMGen call cmtools#CMToolsGenerate(<f-args>) 
 command! -nargs=* CMBuild call cmtools#CMToolsBuild(<f-args>)
-
+command! -nargs=? CMYCM call cmtools#CMToolsYCM(<f-args>)
