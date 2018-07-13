@@ -87,12 +87,16 @@ endfunction
 function! cmtools#CMToolsYCM(...)
 	let l:build_dir = s:CMToolsGetMakeDir(get(a:, 1, ''))
 	let l:source_file = l:build_dir . "/compile_commands.json"
+	let l:target_file = getcwd() . "/compile_commands.json" 
 
 	if !filereadable(l:source_file)
 		echom "There isn't a compile_commands.json at " . l:source_file . "!"
 		return 1
 	endif
+	if filereadable(l:target_file)
+		delete(l:target_file)
+	endif
 
-	execute "!ln -s " . getcwd() . "/compile_commands.json " . l:source_file
+	execute "!ln -s " . l:target_file . " " . l:source_file
 endfunction
 
