@@ -61,7 +61,7 @@ function! cmtools#CMToolsGenerate(...)
 	let a:build_dir = get(a:, 1, '')
 	let l:cmake_args = a:000[1:]
 	if g:cmtools_ycm_gen
-		call add(l:cmake_args, "-DCMAKE_EXPORT_COMPILE_COMMANDS")
+		call add(l:cmake_args, "-DCMAKE_EXPORT_COMPILE_COMMANDS=1")
 	endif
 
 	let l:make_dir = s:CMToolsGetMakeDir(a:build_dir)
