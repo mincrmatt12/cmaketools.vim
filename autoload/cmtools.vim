@@ -85,7 +85,7 @@ function! cmtools#CMToolsBuild(...)
 endfunction
 " CMYCM.impl
 function! cmtools#CMToolsYCM(...)
-	let l:build_dir = s:CMToolsMakeDir(get(a:, 1, ''))
+	let l:build_dir = s:CMToolsGetMakeDir(get(a:, 1, ''))
 	let l:source_file = l:build_dir . "/compile_commands.json"
 
 	if !filereadable(l:source_file)
