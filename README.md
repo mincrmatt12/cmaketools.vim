@@ -17,7 +17,7 @@ Generates the cmake project in the root directory. Parameters are optional, firs
 
 ### `:CMBuild`
 
-Does the same as `:make`, but for a cmake project. You can also give it the directory that you build with CMGen. (the last one used is the default)
+Builds a cmake project. The build dir is the last one used with CMGen. Additional parameters are passed to the `cmtools_mkprog`.
 
 ## Params
 
@@ -25,4 +25,4 @@ Does the same as `:make`, but for a cmake project. You can also give it the dire
 | --- | --- |
 | `g:cmtools_default_dir` | default build directory |
 | `g:cmtools_mkprog` | build tool (default is just make, although some may want it to be cmake --build)
-| 'g:cmtools_cmake` | path to cmake (default cmake) |
+| `g:cmtools_cmake` | path to cmake (default cmake) |
