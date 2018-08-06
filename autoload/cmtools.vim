@@ -23,6 +23,10 @@ endif
 if !exists('g:cmtools_ycm_autolink')
 	let g:cmtools_ycm_autolink = 0
 endif
+
+if !exists('g:cmtools_set_makeprg')
+	let g:cmtools_set_makeprg = 1
+endif
 " Helper functions
 
 " CMToolsGetBuildDir(str val): if val == "" return the default else return
@@ -72,6 +76,9 @@ function! cmtools#CMToolsGenerate(...)
 	execute "!cd " . l:make_dir . "; " . g:cmtools_cmake . " .. " . l:cmake_args
 	if g:cmtools_ycm_autolink
 		call cmtools#CMToolsYCM()
+	endif
+	if g:cmtools_set_makeprg
+		let &makeprg="cd " . l:make_dir . ";" . g:cmtools_mkprog
 	endif
 endfunction
 " CMBuild.impl
